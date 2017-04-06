@@ -13,6 +13,15 @@ public class ListItem {
     this.counter  = counter + 1;
     this.id = this.counter;
   }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
   public String toFile() {
 
     return task + ";" + status;

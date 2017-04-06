@@ -22,17 +22,16 @@ public class Todo {
       if (listItems.size() == 0) {
         System.out.println("No todos for today! :)");
       } else {
-        for (int i = 0; i < listItems.size(); i++) {
-          System.out.println(listItems.get(i));
-        }
+        sout(listItems);
       }
     } else if (args[0].equals("-a") && (args.length == 2)) {
       ListItem addedItem = new ListItem(args[1],"0");
-      System.out.println(addedItem);
       listItems.add(addedItem);
-      for (int i = 0; i < listItems.size(); i++) {
-        System.out.println(listItems.get(i));
-      }
+      sout(listItems);
+      writeToFile(listItems);
+    } else if (args[0].equals("-c") && (args.length == 2)) {
+      listItems.get(Integer.parseInt(args[1])).setStatus("1");
+      sout(listItems);
       writeToFile(listItems);
     }
 
@@ -87,6 +86,12 @@ public class Todo {
       Files.write(path, data);
     } catch (IOException e) {
       e.printStackTrace();
+    }
+  }
+
+  public static void sout(List<ListItem> listItems){
+    for (int i = 0; i < listItems.size(); i++) {
+      System.out.println(listItems.get(i));
     }
   }
 }
