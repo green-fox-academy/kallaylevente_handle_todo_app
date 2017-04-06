@@ -30,7 +30,7 @@ public class Todo {
       sout(listItems);
       writeToFile(listItems);
     } else if (args[0].equals("-c") && (args.length == 2)) {
-      listItems.get(Integer.parseInt(args[1])).setStatus("1");
+      listItems.get(Integer.parseInt(args[1])).setStatus("x");
       sout(listItems);
       writeToFile(listItems);
     }

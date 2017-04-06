@@ -31,7 +31,10 @@ public class ListItem {
   public String toString() {
     String result = "";
     // 1 - Walk the dog
-    result = (this.id + " - " + task );
+    if (status.equals("0")) {
+      status = " ";
+    }
+    result = (this.id + " - " + "[" + status + "] " + task );
     return result;
   }
 }
