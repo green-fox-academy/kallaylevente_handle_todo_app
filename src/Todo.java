@@ -30,25 +30,27 @@ public class Todo {
       listItems.add(addedItem);
       sout(listItems);
       writeToFile(listItems);
-    } else if (args[0].equals("-c") && (args.length == 2) && (Integer.parseInt(args[1]) < (args.length - 1))) {
-      listItems.get(Integer.parseInt(args[1])).setStatus("x");
+    } else if (args[0].equals("-c") && (args.length == 2) && (Integer.parseInt(args[1]) < (listItems.size() + 1))) {
+      listItems.get(Integer.parseInt(args[1]) - 1).setStatus("x");
       sout(listItems);
       writeToFile(listItems);
-    } else if (args[0].equals("-r") && (args.length == 2) && (Integer.parseInt(args[1]) < (args.length - 1))) {
-      listItems.remove(Integer.parseInt(args[1]));
+    } else if (args[0].equals("-r") && (args.length == 2) && (Integer.parseInt(args[1]) < (listItems.size() + 1))) {
+      listItems.remove(Integer.parseInt(args[1]) - 1);
       writeToFile(listItems);
       ListItem.setCounter(0);
+      rawLines = readInput();
       listItems = extractListItem(rawLines);
       sout(listItems);
     } else if (isValidArgument(args[0])) {
-      System.out.println( "Unsupported argument");
+      System.out.println("Unsupported argument");
       sout(listItems);
     } else if (args[0].equals("-a") && (args.length == 1)) {
       System.out.println("Unable to add: no task provided");
     } else if (args[0].equals("-r") && (args.length == 1)) {
       System.out.println("Unable to remove: no index provided");
+    } else if (args[0].equals("-r") && (Integer.parseInt(args[1]) > (listItems.size() ))) {
+      System.out.println("Unable to remove: index is out of bound");
     }
-
   }
 
   public static void emptyCase() {
@@ -109,17 +111,17 @@ public class Todo {
 
   public static boolean isValidArgument(String argument) {
     String[] arguments = {"-l", "-r", "-a", "-c"};
-    int isvalid =0;
-    for (String arg : arguments         ) {
+    int isvalid = 0;
+    for (String arg : arguments) {
       if (arg.equals(argument)) {
         isvalid = 1;
       }
 
     }
-      if(isvalid == 1 ){
+    if (isvalid == 1) {
       return false;
-      }
-      return true;
+    }
+    return true;
 
   }
 }
