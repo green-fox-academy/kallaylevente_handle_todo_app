@@ -3,6 +3,15 @@ import java.util.ArrayList;
 public class ListItem {
   private String task;
   private String status;
+
+  public static int getCounter() {
+    return counter;
+  }
+
+  public static void setCounter(int counter) {
+    ListItem.counter = counter;
+  }
+
   static int counter = 0;
   public int id = 0;
 
