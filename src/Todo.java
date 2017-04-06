@@ -12,11 +12,29 @@ public class Todo {
     List<String> rawLines;
     rawLines = readInput();
     System.out.println(rawLines);
+    List<ListItem> listItems = new ArrayList<>();
+    listItems = extractListItem(rawLines);
+    System.out.println(listItems);
+
+    if (args.length == 0) {
+      
+    }
 
 
   }
 
-
+  public static List<ListItem> extractListItem(List<String> rawLines){
+    List<ListItem> listItems = new ArrayList<>();
+    for (String lines : rawLines) {
+      String[] splittedLines = lines.split(";");
+      String task = new String();
+      String status = new String();
+      task = splittedLines[0] ;
+      status = splittedLines[1];
+      listItems.add(new ListItem(task, status));
+    }
+    return listItems;
+  }
 
 
 
