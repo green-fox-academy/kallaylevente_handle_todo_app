@@ -26,7 +26,15 @@ public class Todo {
           System.out.println(listItems.get(i));
         }
       }
-    } else if (args[0].equals("-a") && )
+    } else if (args[0].equals("-a") && (args.length == 2)) {
+      ListItem addedItem = new ListItem(args[1],"0");
+      System.out.println(addedItem);
+      listItems.add(addedItem);
+      for (int i = 0; i < listItems.size(); i++) {
+        System.out.println(listItems.get(i));
+      }
+      writeToFile(listItems);
+    }
 
   }
 
@@ -67,5 +75,18 @@ public class Todo {
       rawLines = new ArrayList<>();
     }
   return rawLines;
+  }
+
+  private static void writeToFile(List<ListItem> listItems) {
+    List<String> data = new ArrayList<>();
+    for (ListItem item : listItems         ) {
+      data.add(item.toFile());
+    }
+    Path path = Paths.get(FILE_NAME);
+    try {
+      Files.write(path, data);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

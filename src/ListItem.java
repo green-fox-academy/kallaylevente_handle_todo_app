@@ -13,6 +13,10 @@ public class ListItem {
     this.counter  = counter + 1;
     this.id = this.counter;
   }
+  public String toFile() {
+
+    return task + ";" + status;
+  }
 
   @Override
   public String toString() {
