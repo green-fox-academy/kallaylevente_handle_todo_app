@@ -3,7 +3,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Todo {
@@ -12,10 +11,8 @@ public class Todo {
   public static void main(String[] args) {
     List<String> rawLines;
     rawLines = readInput();
-    //System.out.println(rawLines);
     List<ListItem> listItems = new ArrayList<>();
     listItems = extractListItem(rawLines);
-    // System.out.println(listItems);
 
     if (args.length == 0) {
       emptyCase();
@@ -48,7 +45,7 @@ public class Todo {
       System.out.println("Unable to add: no task provided");
     } else if (args[0].equals("-r") && (args.length == 1)) {
       System.out.println("Unable to remove: no index provided");
-    } else if (args[0].equals("-r") && (Integer.parseInt(args[1]) > (listItems.size() ))) {
+    } else if (args[0].equals("-r") && (Integer.parseInt(args[1]) > (listItems.size()))) {
       System.out.println("Unable to remove: index is out of bound");
     }
   }
@@ -76,7 +73,6 @@ public class Todo {
     }
     return listItems;
   }
-
 
   public static List<String> readInput() {
     List<String> rawLines;
@@ -116,12 +112,10 @@ public class Todo {
       if (arg.equals(argument)) {
         isvalid = 1;
       }
-
     }
     if (isvalid == 1) {
       return false;
     }
     return true;
-
   }
 }

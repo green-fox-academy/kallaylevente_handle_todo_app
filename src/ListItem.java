@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class ListItem {
   private String task;
   private String status;
