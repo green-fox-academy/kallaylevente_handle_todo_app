@@ -8,7 +8,16 @@ public class ListItem {
     ListItem.counter = counter;
   }
 
+  public String getStatus() {
+    return status;
+  }
+
+  public static int getCounter() {
+    return counter;
+  }
+
   public ListItem(String task, String status) {
+
     this.task = task;
     this.status = status;
     this.counter  = counter + 1;

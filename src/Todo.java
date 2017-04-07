@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Todo {
+
   public static void main(String[] args) {
     List<String> rawLines;
     rawLines = readInput();
-    List<ListItem> listItems = new ArrayList<>();
-    listItems = extractListItem(rawLines);
+    List<ListItem> listItems = extractListItem(rawLines);
 
     if (args.length == 0) {
       emptyCase();
@@ -18,29 +18,19 @@ public class Todo {
       caseL(args,listItems);
     } else if (args[0].equals("-a") ){
       caseA(args,listItems);
-    } else if (args[0].equals("-c") && (args.length == 2) && (Integer.parseInt(args[1]) < (listItems.size() + 1))) {
-      listItems.get(Integer.parseInt(args[1]) - 1).setStatus("x");
-      sout(listItems);
-      writeToFile(listItems);
-    } else if (args[0].equals("-r") && (args.length == 2) && (Integer.parseInt(args[1]) < (listItems.size() + 1))) {
-      listItems.remove(Integer.parseInt(args[1]) - 1);
-      writeToFile(listItems);
-      ListItem.setCounter(0);
-      rawLines = readInput();
-      listItems = extractListItem(rawLines);
-      sout(listItems);
+    } else if (args[0].equals("-c") ){
+      caseC(args,listItems);
+    } else if (args[0].equals("-r")){
+      caseR(args,listItems,rawLines);
     } else if (isValidArgument(args[0])) {
-      System.out.println("Unsupported argument");
       emptyCase();
-    }  else if (args[0].equals("-r") && (args.length == 1)) {
-      System.out.println("Unable to remove: no index provided");
-    } else if (args[0].equals("-r") && (Integer.parseInt(args[1]) > (listItems.size()))) {
-      System.out.println("Unable to remove: index is out of bound");
-    }
+    } 
   }
 
   public static void emptyCase() {
-    System.out.println("Java Todo application\n" +
+    System.out.println("Unsupported argument");
+    System.out.println ("=======================\n" +
+      "Java Todo application\n" +
       "=======================\n" +
       "\n" +
       "Command line arguments:\n" +
@@ -124,6 +114,29 @@ public class Todo {
       writeToFile(listItems);
     }else if (args[0].equals("-a") && (args.length == 1)) {
       System.out.println("Unable to add: no task provided");
+    }
+  }
+
+  public static void  caseC(String[] args, List<ListItem> listItems) {
+    if (args[0].equals("-c") && (args.length == 2) && (Integer.parseInt(args[1]) < (listItems.size() + 1))) {
+      listItems.get(Integer.parseInt(args[1]) - 1).setStatus("x");
+      sout(listItems);
+      writeToFile(listItems);
+    }
+  }
+
+  public static void caseR(String[] args, List<ListItem> listItems, List<String> rawLines) {
+    if (args[0].equals("-r") && (args.length == 2) && (Integer.parseInt(args[1]) < (listItems.size() + 1))) {
+      listItems.remove(Integer.parseInt(args[1]) - 1);
+      writeToFile(listItems);
+      ListItem.setCounter(0);
+      rawLines = readInput();
+      listItems = extractListItem(rawLines);
+      sout(listItems);
+    }else if (args[0].equals("-r") && (args.length == 1)) {
+      System.out.println("Unable to remove: no index provided");
+    } else if (args[0].equals("-r") && (Integer.parseInt(args[1]) > (listItems.size()))) {
+      System.out.println("Unable to remove: index is out of bound");
     }
   }
 }
