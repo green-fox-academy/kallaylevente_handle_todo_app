@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Todo {
-  private final static String FILE_NAME = "todo.csv";
-
   public static void main(String[] args) {
     List<String> rawLines;
     rawLines = readInput();
@@ -76,7 +74,7 @@ public class Todo {
 
   public static List<String> readInput() {
     List<String> rawLines;
-    Path path = Paths.get("todo.csv");
+    Path path = Paths.get("../../../todo.csv");
     try {
       rawLines = Files.readAllLines(path);
     } catch (IOException e) {
@@ -91,7 +89,7 @@ public class Todo {
     for (ListItem item : listItems) {
       data.add(item.toFile());
     }
-    Path path = Paths.get(FILE_NAME);
+    Path path = Paths.get("../../../todo.csv");
     try {
       Files.write(path, data);
     } catch (IOException e) {
