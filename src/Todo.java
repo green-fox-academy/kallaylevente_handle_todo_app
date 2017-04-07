@@ -14,17 +14,10 @@ public class Todo {
 
     if (args.length == 0) {
       emptyCase();
-    } else if ((args[0].equals("-l") && (args.length == 1))) {
-      if (listItems.size() == 0) {
-        System.out.println("No todos for today! :)");
-      } else {
-        sout(listItems);
-      }
-    } else if (args[0].equals("-a") && (args.length == 2)) {
-      ListItem addedItem = new ListItem(args[1], "0");
-      listItems.add(addedItem);
-      sout(listItems);
-      writeToFile(listItems);
+    } else if (args[0].equals("-l")) {
+      caseL(args,listItems);
+    } else if (args[0].equals("-a") ){
+      caseA(args,listItems);
     } else if (args[0].equals("-c") && (args.length == 2) && (Integer.parseInt(args[1]) < (listItems.size() + 1))) {
       listItems.get(Integer.parseInt(args[1]) - 1).setStatus("x");
       sout(listItems);
@@ -38,10 +31,8 @@ public class Todo {
       sout(listItems);
     } else if (isValidArgument(args[0])) {
       System.out.println("Unsupported argument");
-      sout(listItems);
-    } else if (args[0].equals("-a") && (args.length == 1)) {
-      System.out.println("Unable to add: no task provided");
-    } else if (args[0].equals("-r") && (args.length == 1)) {
+      emptyCase();
+    }  else if (args[0].equals("-r") && (args.length == 1)) {
       System.out.println("Unable to remove: no index provided");
     } else if (args[0].equals("-r") && (Integer.parseInt(args[1]) > (listItems.size()))) {
       System.out.println("Unable to remove: index is out of bound");
@@ -63,10 +54,8 @@ public class Todo {
     List<ListItem> listItems = new ArrayList<>();
     for (String lines : rawLines) {
       String[] splittedLines = lines.split(";");
-      String task = new String();
-      String status = new String();
-      task = splittedLines[0];
-      status = splittedLines[1];
+      String task = splittedLines[0];
+      String status = splittedLines[1];
       listItems.add(new ListItem(task, status));
     }
     return listItems;
@@ -115,5 +104,26 @@ public class Todo {
       return false;
     }
     return true;
+  }
+
+  public static void caseL(String[] args, List<ListItem> listItems) {
+     if ((args[0].equals("-l") && (args.length == 1))) {
+      if (listItems.size() == 0) {
+        System.out.println("No todos for today! :)");
+      } else {
+        sout(listItems);
+      }
+    }
+  }
+
+  public static void caseA(String[] args, List<ListItem> listItems) {
+    if (args[0].equals("-a") && (args.length == 2)) {
+      ListItem addedItem = new ListItem(args[1], "0");
+      listItems.add(addedItem);
+      sout(listItems);
+      writeToFile(listItems);
+    }else if (args[0].equals("-a") && (args.length == 1)) {
+      System.out.println("Unable to add: no task provided");
+    }
   }
 }
